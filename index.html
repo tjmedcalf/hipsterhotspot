@@ -11,23 +11,32 @@
         <link rel="stylesheet" href="css/style.css" />
         
 
-        <script src="js/modernizr.js"></script>
+        <script src="js/dist/modernizr.js"></script>
 
+
+        <script src="js/dist/lodash.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
         
+        <!-- ANGULAR MODULES -->
+        <script src="js/dist/angular-simple-logger.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
+        <script src="js/dist/angular-google-maps.js"></script>
     </head>
-    <body onload="initMap();">
-        <div id="map"></div>
 
-        
-        
+    <body ng-app="hipsterhotspots" ng-controller="MapController">
+        <ui-gmap-google-map styles="map.styles" center='map.center' zoom='map.zoom' options="mapOptions">
+            <ui-gmap-markers coords="'self'" models="markers" idKey="'id'" icon="'icon'" click="markerClick"></ui-gmap-markers>
+        </ui-gmap-google-map>
+
         <h1 class="logo-abbr">HHS</h1>
         <h2 class="garnish--top">#Hipster AF</h2>
 
-        <div class="bullshit-panel" href="#">
+        <div class="bullshit-panel" href="#" ng-class="{out: showReview}">
             <a href="#" class="faux-cous"></a>
 
             <div class="rel-wrap">
-                <button class="btn--icon fa fa-close"></button>
+                <button class="btn--icon fa fa-close" ng-click="closeReview()"></button>
 
                 <header class="bsp__header">
                     <h1>HipsterHotSpots</h1>
@@ -35,55 +44,8 @@
                 </header>
                 
                 <div class="bsp__detail clearfix" ng-view>
-                    
-                    <!-- <img class="spot_img" src="/img/thumb_IMG_0108_1024.jpg" alt=""> -->
-
-                    <div class="review">
-                        <h2>Sweet Mothers Kitchen</h2>
-                        <h3>2 courtenay place, 6011, wellington</h3>
-
-                        <p>Mustache offal salvia occupy, +1 swag food truck blue bottle wolf. Hoodie narwhal messenger bag, kombucha mixtape helvetica cred organic yr pinterest semiotics. Pork belly before they sold out bitters, williamsburg hella four loko green juice single-origin coffee typewriter iPhone artisan chicharrones. Cardigan fanny pack lo-fi vice four loko actually, single-origin coffee readymade yr. Vice shoreditch whatever ennui. Pork belly venmo helvetica fashion axe four dollar toast. Banjo etsy thundercats literally flexitarian marfa keffiyeh fixie yr seitan, cronut chartreuse beard cold-pressed.</p>
-                    </div>
-                    
-                    <!-- <div class="ratings">
-                        <h1>AF</h1>
-                        <h4>Extra review magic box</h4>
-                        
-                        <table class="features">
-                            <tr>
-                                <td><strong>V</strong> <span>Vegan</span></td>
-                                <td><strong>V</strong> <span>Vegan</span></td>
-                                <td><strong>V</strong> <span>Vegan</span></td>
-                                <td><strong>V</strong> <span>Vegan</span></td>
-                            </tr>
-                        </table>
-
-                        <table class="score-card">
-                            <tr>
-                                <td>Signifigantly tattooed staff</td>
-                                <td><strong>+10</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Op-shop furniture</td>
-                                <td><strong>+50</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Local artist art on walls</td>
-                                <td><strong>+34</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Lots of bike parking</td>
-                                <td><strong>+25</strong></td>
-                            </tr>
-                        </table>
-
-                        <footer>
-                            <strong class="score">119</strong>
-                            <p class="score-unit">Mustaches</p>
-                            <img src="/img/mustache.png" />
-                        </footer>
-                    </div>-->
-                </div> 
+                    <!-- RE-VIEW TEMPLATE -->
+                </div>
 
             </div>
         </div>
@@ -91,18 +53,23 @@
         <h2 class="garnish--bottom">HIPSTERHOTSPOTS</h2>
 
 
-        <script src="js/jquery-2.0.0b2.js"></script>
+        <script src="js/dist/jquery-2.0.0b2.js"></script>
 
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0o6u22ctUDNGu6sBKbdLEkeIqQY53Dgo&callback=initMap"></script> 
-        
+        <script src="app/app.js"></script>
+        <script src="app/controllers/hipsterhotspot.mapController.js"></script>
+        <script src="app/controllers/hipsterhotspot.reviewController.js"></script>
 
+        <script src="app/services/hipsterhotspot.markersService.js"></script>
+        <script src="app/services/hipsterhotspot.reviewService.js"></script>
 
+        <script src="app/models/hipsterhotspot.markersModel.js"></script>
+       
         <script>
             // Create a map object and specify the DOM element for display.
 
-            var styles = [{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#0F0919"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#E4F7F7"}]},{"elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#002FA7"}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"color":"#E60003"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#FBFCF4"}]},{"featureType":"poi.business","elementType":"geometry.fill","stylers":[{"color":"#FFED00"}]},{"featureType":"poi.government","elementType":"geometry.fill","stylers":[{"color":"#D41C1D"}]},{"featureType":"poi.school","elementType":"geometry.fill","stylers":[{"color":"#BF0000"}]},{"featureType":"transit.line","elementType":"geometry.fill","stylers":[{"saturation":-100}]}];
+            //var 
             
-            function initMap() {
+            /*function initMap() {
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -41.289916, lng: 174.780121},
@@ -160,7 +127,7 @@
                 });
                 
 
-            }
+            }*/
         </script>
 
 

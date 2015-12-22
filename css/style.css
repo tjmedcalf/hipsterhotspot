@@ -97,7 +97,7 @@ body {
   content: "\e001";
 }
 
-#map {
+.angular-google-map-container, #map {
 	position:absolute;
 	top:0;
 	left:0;
