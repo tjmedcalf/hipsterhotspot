@@ -15,8 +15,12 @@ angular.module('hipsterhotspots', [
 		.when('/review/:spotId', {
 			controller: 'ReviewController',
 			templateUrl: '/app/views/review.html'
-		}).
-        otherwise({
+		})
+        .when('/add', {
+            controller: 'NewController',
+            templateUrl: '/app/views/addForm.html'
+        })
+        .otherwise({
             controller: 'MapController',
         });
 }])
@@ -24,7 +28,7 @@ angular.module('hipsterhotspots', [
     GoogleMapApiProviders.configure({
         key: 'AIzaSyD0o6u22ctUDNGu6sBKbdLEkeIqQY53Dgo',
         v: '3.20', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization'
+        libraries: 'weather,geometry,visualization,places'
     });
 }])
 

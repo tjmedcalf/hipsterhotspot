@@ -190,7 +190,8 @@ h2 {
 }
 
 .garnish--top,
-.garnish--bottom {
+.garnish--bottom,
+.btn--global {
 	position:absolute;
 	z-index:20;
 }
@@ -225,6 +226,10 @@ h2 {
 	top:5px;
 }
 
+.garnish--top .btn {
+	
+}
+
 .garnish--bottom {
 	bottom:40px;
 	left:340px;
@@ -240,6 +245,21 @@ h2 {
 	left:50px;
 	position: relative;
 	top:5px;
+}
+
+.btn {
+	background:#002FA7;
+	color:white;
+	display: inline-block;
+	padding:15px 20px;
+}
+
+.btn--global {
+	top:50px;
+	right:50px;
+	text-decoration: none;
+	font-weight:bold;
+	font-size:30px;
 }
 
 .btn--icon {
